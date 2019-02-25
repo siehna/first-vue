@@ -1,7 +1,5 @@
 <template>
   <div>
-    <img src="../../assets/logo.png">
-    <h1>CustomTodo.vue</h1>
     <hr />
     <form>
       <button @click="addTodo()">ADD TASK</button>
@@ -55,6 +53,9 @@
           if (this.todos[i].done) this.todos.splice(i, 1)
         }
       }
+    },
+    mounted:function () {
+      eventHub.$emit('change-title','CustomTodo' )
     }
   }
 </script>

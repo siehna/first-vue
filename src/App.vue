@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-
+    <ContentHeader></ContentHeader>
     <router-view></router-view>
+    aaa
   </div>
 </template>
 
 <script>
+   import ContentHeader from '@/components/Header/header'
+
   export default {
-    name: 'app'
+    name: 'app',
+    components: {
+      ContentHeader
+    }
   }
 </script>
 

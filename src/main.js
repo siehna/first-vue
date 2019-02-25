@@ -6,6 +6,9 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+//完全に空
+window.eventHub = new Vue()
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
