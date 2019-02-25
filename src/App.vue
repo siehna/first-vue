@@ -1,18 +1,20 @@
 <template>
   <div id="app">
     <ContentHeader></ContentHeader>
+    <Sidebar></Sidebar>
     <router-view></router-view>
-    aaa
   </div>
 </template>
 
 <script>
-   import ContentHeader from '@/components/Header/header'
+   import ContentHeader from '@/components/Header/Header'
+   import Sidebar from '@/components/Sidebar/Sidebar'
 
   export default {
     name: 'app',
     components: {
-      ContentHeader
+      ContentHeader,
+      Sidebar
     }
   }
 </script>

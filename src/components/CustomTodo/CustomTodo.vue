@@ -1,6 +1,5 @@
 <template>
   <div>
-    <hr />
     <form>
       <button @click="addTodo()">ADD TASK</button>
       <button @click="removeTodo()">DELETE FINISHED TASKS</button>
