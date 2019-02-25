@@ -1,7 +1,7 @@
 <template>
   <div>
     <img src="../../assets/logo.png">
-    <h1>Todo.vue</h1>
+    <h1>CustomTodo.vue</h1>
     <hr />
     <form>
       <button @click="addTodo()">ADD TASK</button>
