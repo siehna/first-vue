@@ -2,6 +2,9 @@
   <h3>sidebar</h3>
 </template>
 
-<script></script>
+<script>
+</script>
 
-<style></style>
+<style scoped>
+
+</style>

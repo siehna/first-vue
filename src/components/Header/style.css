@@ -1,0 +1,13 @@
+div{
+  background-color: cornflowerblue;
+  height: 15vh;
+}
+img{
+  float: left;
+  vertical-align: middle;
+  width: 10vw;
+  padding-left: 5vw;
+}
+h1{
+  vertical-align: middle;
+}
