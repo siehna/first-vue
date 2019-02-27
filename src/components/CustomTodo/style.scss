@@ -1,0 +1,21 @@
+@mixin flex-vender() {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+}
+.task-list {
+  @include flex-vender;
+  flex-direction: column;
+  align-items: center;
+  &__item {
+    width: 270px;
+    text-align: left;
+    $element: #{&};
+    &--checked {
+      @extend #{$element};
+      color: #85a6c6;
+    }
+  }
+}
