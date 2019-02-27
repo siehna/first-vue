@@ -8,9 +8,11 @@
     <v-btn @click="removeTodo()" outline fab dark color="pink">
       <v-icon dark>remove</v-icon>
     </v-btn>
-    <p>input: <input type="text" v-model="newTodo"></p>
+    <!--<p>input: <input type="text" v-model="newTodo"></p>-->
+    <v-flex xs12 sm6 md3>
+      <v-text-field label="input" v-model="newTodo"></v-text-field>
+    </v-flex>
     <p>task: {{ newTodo }}</p>
-    <h1>FOO</h1>
   </form>
   <div class="task-list">
     <label class="task-list__item"
