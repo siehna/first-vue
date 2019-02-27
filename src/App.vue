@@ -2,7 +2,7 @@
   <div id="app">
     <ContentHeader></ContentHeader>
     <Sidebar></Sidebar>
-    <router-view class="content"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -27,14 +27,5 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-  }
-
-
-
-  .content{
-    float: left;
-    width: 75% ;
-    height: 30vh;
-    background-color: thistle;
   }
 </style>

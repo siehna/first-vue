@@ -1,7 +1,13 @@
-<div>
+<div class="content" xmlns:v-bind="http://www.w3.org/1999/xhtml">
   <form>
-    <button @click="addTodo()">ADD TASK</button>
-    <button @click="removeTodo()">DELETE FINISHED TASKS</button>
+    <!--<button @click="addTodo()">ADD TASK</button>-->
+    <v-btn @click="addTodo()" fab outline dark color="cyan">
+      <v-icon dark>edit</v-icon>
+    </v-btn>
+    <!--<button @click="removeTodo()">DELETE FINISHED TASKS</button>-->
+    <v-btn @click="removeTodo()" outline fab dark color="pink">
+      <v-icon dark>remove</v-icon>
+    </v-btn>
     <p>input: <input type="text" v-model="newTodo"></p>
     <p>task: {{ newTodo }}</p>
     <h1>FOO</h1>
@@ -11,9 +17,9 @@
            v-for="todo in todos"
            v-bind:class="{ 'task-list__item--checked': todo.done }">
       <input type="checkbox" v-model="todo.done">
-      <input type="checkbox" v-model="todo.editing">
       <input v-if="todo.editing" v-model="todo.text" @keyup.enter="todo.editing = !todo.editing">
       <span v-else>{{ todo.text }}</span>
+      <input type="checkbox" v-model="todo.editing">
     </label>
   </div>
 </div>
