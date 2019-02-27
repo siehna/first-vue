@@ -1,11 +1,12 @@
 div{
-  background-color: cornflowerblue;
+  background-color: darkgray;
   height: 15vh;
 }
 img{
   float: left;
   vertical-align: middle;
   width: 10vw;
+  height: 10vh;
   padding-left: 5vw;
 }
 h1{
