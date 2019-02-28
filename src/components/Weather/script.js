@@ -1,3 +1,6 @@
 export default{
-  name:'weather-component'
+  name:'weather-component',
+  mounted:function () {
+    eventHub.$emit('change-title','Weather' )
+  }
 }
