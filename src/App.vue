@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <ContentHeader></ContentHeader>
-    <Sidebar></Sidebar>
-    <router-view></router-view>
+    <v-app dark id="inspire">
+      <ContentHeader></ContentHeader>
+      <Sidebar></Sidebar>
+      <router-view></router-view>
+    </v-app>
   </div>
 </template>
 

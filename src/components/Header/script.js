@@ -2,13 +2,15 @@ export default {
   name: 'hello',
   data: function () {
     return {
-      title: 'no component'
+      title: 'Todo'
     }
   },
   methods: {
     changeTitle: function(componentName){
       this.title = componentName
-    }
+    },
+    // drawerInOut:function(drawer){
+    // }
   },
   //最初に呼ばれる
   mounted(){
@@ -16,6 +18,7 @@ export default {
     // this.changeTitle('changed')
   },
   created: function () {
-    eventHub.$on('change-title', this.changeTitle)
+    eventHub.$on('change-title', this.changeTitle);
+    eventHub.$emit('menu-click', !drawer);
   }
 }

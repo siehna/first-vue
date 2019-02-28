@@ -1,15 +1,22 @@
-<!--<v-navigation-drawer-->
-  <!--fixed-->
-  <!--clipped-->
-  <!--v-model="drawer"-->
-  <!--app-->
-<!--&gt;-->
-  <div>
-    <h1>sidebar</h1>
-    <!--<hr />-->
-    <router-link to="/">Todo</router-link>
-    <br />
-    <router-link to="/custom">CustomTodo</router-link>
-  </div>
+<!--<div>-->
+<!--<h1>sidebar</h1>-->
+<!--&lt;!&ndash;<hr />&ndash;&gt;-->
+<!--<router-link to="/">Todo</router-link>-->
+<!--<br />-->
+<!--<router-link to="/custom">CustomTodo</router-link>-->
+<!--</div>-->
+<v-navigation-drawer
+  fixed
+  clipped
+  v-model="drawer"
+  app
+>
+  <v-list dense>
+    <v-list-tile v-for="item in items" :key="item.title" :to="item.link" @click="">
+      <v-list-tile-content>
+        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+  </v-list>
 
-<!--</v-navigation-drawer>-->
+</v-navigation-drawer>
