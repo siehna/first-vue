@@ -5,7 +5,8 @@ export default {
     return {
       items: [
         {title: 'Todo', link: '/'},
-        {title: 'CustomTodo', link: '/custom'}
+        {title: 'CustomTodo', link: '/custom'},
+        {title: 'Weather', link: '/weather'}
       ]
     }
   }
