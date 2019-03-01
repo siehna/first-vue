@@ -9,16 +9,16 @@ export default {
     changeTitle: function(componentName){
       this.title = componentName
     },
-    // drawerInOut:function(drawer){
-    // }
+    menuChange: function(){
+      eventHub.$emit('menu-click')
+    }
   },
   //最初に呼ばれる
   mounted(){
     // alert('呼ばれました') タイトルを変えるメソッド
     // this.changeTitle('changed')
   },
-  created: function () {
+  created: function (){
     eventHub.$on('change-title', this.changeTitle);
-    eventHub.$emit('menu-click', !drawer);
   }
 }

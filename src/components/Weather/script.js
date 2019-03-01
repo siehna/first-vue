@@ -4,7 +4,10 @@ export default{
   name:'weather-component',
   data(){
     return{
-      info:'no response'
+      info:'no response',
+      dateLabel:null,
+      telop:null,
+      date:null
     }
   },
   mounted:function (){
@@ -13,7 +16,13 @@ export default{
     //天気情報の取得
     axios
       .get('http://weather.livedoor.com/forecast/webservice/json/v1?city=130010')
-      .then(response => {this.info=response})
+      .then(response => {
+        this.dateLabel=response['data']['forecasts'][0]["dateLabel"]
+        this.telop=response['data']['forecasts'][0]["telop"]
+        this.date=response['data']['forecasts'][0]["date"]
+        this.info=response['data']['forecasts'][0]
+        console.log(response)
+      })
       .catch(err => {this.info='fault to get API'});
   }
 }
