@@ -1,5 +1,4 @@
 export default {
-  name: 'hello',
   drawer: true,
   data: function () {
     return {
@@ -8,6 +7,11 @@ export default {
         {title: 'CustomTodo', link: '/custom'},
         {title: 'Weather', link: '/weather'}
       ]
+    }
+  },
+  method :{
+    reverseDrawer:()=>{
+      this.drawer = !this.drawer
     }
   }
 }
