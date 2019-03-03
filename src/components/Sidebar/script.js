@@ -11,13 +11,13 @@ export default {
   },
   method :{
     reverseDrawer:function(){
-      // this.drawer = !this.drawer;
-    if(this.drawer){
-      this.drawer = false
-      return
-    }
-    this.drawer = true
-    return
+      this.drawer = !this.drawer
+    // if(this.drawer){
+    //   this.drawer = false
+    //   return
+    // }
+    // this.drawer = true
+    // return
     }
   },
   created(){
