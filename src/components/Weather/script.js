@@ -8,8 +8,23 @@ export default{
       dateLabel:'empty',
       telop:'no data',
       date:'no data',
+      text:'no text',
       //0:今日 1:明日 2:明後日
-      when: 1
+      when: 1,
+      items: [
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+        },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+        },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+        },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+        }
+      ]
     }
   },
   mounted:function (){
@@ -22,6 +37,7 @@ export default{
         this.dateLabel=response['data']['forecasts'][this.when]["dateLabel"]
         this.telop=response['data']['forecasts'][this.when]["telop"]
         this.date=response['data']['forecasts'][this.when]["date"]
+        this.text=response['data']['description']['text']
         this.info=response['data']['forecasts'][this.when]
         console.log(response)
       })
