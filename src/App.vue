@@ -3,6 +3,7 @@
     <v-app dark id="inspire">
       <ContentHeader></ContentHeader>
       <Sidebar></Sidebar>
+      <!--<Theme></Theme>-->
       <router-view></router-view>
     </v-app>
   </div>
@@ -11,6 +12,7 @@
 <script>
    import ContentHeader from '@/components/Header/Header'
    import Sidebar from '@/components/Sidebar/Sidebar'
+   // import Theme from '@/components/Theme/Theme'
 
   export default {
     // el: '#app',
@@ -18,6 +20,7 @@
     components: {
       ContentHeader,
       Sidebar
+      // Theme
     }
   }
 </script>
