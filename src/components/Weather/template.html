@@ -4,11 +4,11 @@
       <!--Active: {{ bottomNav }}-->
     <!--</div>-->
 
-     <h2>when:{{ when }}</h2><br/>
      <h2>{{ dateLabel }}の天気</h2><br/>
      <h2>{{ telop }}</h2><br/>
      <h2>最低気温 {{ min }} ℃</h2><br/>
      <h2>最高気温 {{ max }} ℃</h2><br/>
+     <h2>when:{{ when }}</h2><br/>
      <h2>{{ date }}</h2><br/><br/><br/>
      <!--<img src={{ iconUrl }}><br/>-->
      <!--<h2>{{ info }}</h2><br/><br/>-->
@@ -21,7 +21,7 @@
     >
       <v-btn
         color="teal"
-        v-on:click="when=0,getData"
+        v-on:click="pickUpData(0)"
       >
         <span>Today</span>
         <v-icon>today</v-icon>
@@ -29,7 +29,7 @@
 
       <v-btn
         color="teal"
-        v-on:click="when=1,getData"
+        v-on:click="pickUpData(1)"
       >
         <span>Tomorrow</span>
         <v-icon>filter_1</v-icon>
@@ -37,7 +37,7 @@
 
       <v-btn
         color="teal"
-        v-on:click="when=2,getData"
+        v-on:click="pickUpData(2)"
       >
         <span>2days Tomorrow</span>
         <v-icon>filter_2</v-icon>

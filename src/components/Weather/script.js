@@ -16,8 +16,9 @@ export default{
       when: 1
     }
   },
-  method:{
-    getData: function () {
+  methods:{
+    pickUpData: function (num) {
+      this.when=num
       axios
         .get('http://weather.livedoor.com/forecast/webservice/json/v1?city=130010')
         .then(response => {
@@ -31,8 +32,11 @@ export default{
           this.info=response['data']['forecasts'][this.when]
           console.log(response)
         })
-        .catch(err => {this.info='fault to get API'});
+        .catch(err => {this.info='fault to get API'})
     }
+    // setWhen0: function () {
+    //   this.when=0
+    // }
   },
   mounted:function (){
     //ヘッダーへのエミット
