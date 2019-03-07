@@ -18,7 +18,7 @@ export default{
       cityId:'',
 
 
-      dropdown_wide: ['Arial', 'Calibri', 'Courier', 'Verdana'],
+      dropdown_wide: [],
       dropdown_close: [
         { text: 'list', callback: () => console.log('list') },
         { text: 'favorite', callback: () => console.log('favorite') },
@@ -29,10 +29,14 @@ export default{
       num: 1
     }
   },
+
+
+
+
   methods:{
     // クリックするとAPI取得ができるメソッド
     pickUpData: function () {
-      for(var num=0; num<3; num++){
+      for(var num=0; num<2; num++){
         axios
           .get('http://weather.livedoor.com/forecast/webservice/json/v1?city='+this.cityCode)
           .then(response => {
@@ -50,40 +54,72 @@ export default{
       }
     },
 
+
+
     getLocation: function(){
       axios
         .get('http://weather.livedoor.com/forecast/rss/primary_area.xml',{responseType:'document'})
         .then(responseXml =>{
-          // console.log(responseXml)
+          //広域エリアリストにプッシュ（配列）
+          var prefLength = responseXml['data'].getElementsByTagName('pref').length
+          for(var i=0; i<prefLength; i++){
+            this.$set(this.dropdown_wide, i, responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
+            //小規模エリアリストにプッシュ（連想配列）
+            var childrenLength=responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city').length
+            for(var j=0; j<childrenLength; j++){
+
+            }
+          }
+
+
+
           this.areaName=responseXml['data'].getElementsByTagName('pref')[20].attributes['title'].textContent
           this.cityName=responseXml['data'].getElementsByTagName('pref')[20].getElementsByTagName('city')[0].attributes['title'].textContent
           this.cityId=responseXml['data'].getElementsByTagName('pref')[20].getElementsByTagName('city')[0].attributes['id'].textContent+''
+          // console.log(responseXml)
+          console.log(this.dropdown_wide)
           console.log(this.areaName)
           console.log(this.cityName)
           console.log(this.cityId)
           console.log(this.cityCode)
         })
-    }
+    },
+
+
   },
+
+
+
+
+
   mounted:function (){
-    //ヘッダーへのエミット
+    //ヘッダーへページ名のエミット
     eventHub.$emit('change-title','Weather');
+
+    //リスト情報の取得
     this.getLocation();
+
+
     //天気情報の取得
+
+
+
+
+
     // for(var num=0; num<3; num++){
-    axios
-      .get('http://weather.livedoor.com/forecast/webservice/json/v1?city='+this.cityCode)//Idにすると404が出る、要質問
-      .then(response => {
-        this.dateLabel=response['data']['forecasts'][this.num]["dateLabel"]
-        this.telop=response['data']['forecasts'][this.num]["telop"]
-        this.iconUrl=response['data']['forecasts'][this.num]["image"]["url"]
-        this.date=response['data']['forecasts'][this.num]["date"]
-        // this.min=response['data']['forecasts'][num]["temperature"]["min"]["celsius"]
-        // this.max=response['data']['forecasts'][num]["temperature"]["max"]["celsius"]
-        this.text=response['data']['description']['text']
-        // this.info=response['data']['forecasts'][this.num]
-        // console.log(response)
-      })
-      .catch(err => {this.info='fault to get API'})
+    // axios
+    //   .get('http://weather.livedoor.com/forecast/webservice/json/v1?city='+this.cityCode)//Idにすると404が出る、要質問
+    //   .then(response => {
+    //     this.dateLabel=response['data']['forecasts'][this.num]["dateLabel"]
+    //     this.telop=response['data']['forecasts'][this.num]["telop"]
+    //     this.iconUrl=response['data']['forecasts'][this.num]["image"]["url"]
+    //     this.date=response['data']['forecasts'][this.num]["date"]
+    //     // this.min=response['data']['forecasts'][num]["temperature"]["min"]["celsius"]
+    //     // this.max=response['data']['forecasts'][num]["temperature"]["max"]["celsius"]
+    //     this.text=response['data']['description']['text']
+    //     // this.info=response['data']['forecasts'][this.num]
+    //     // console.log(response)
+    //   })
+    //   .catch(err => {this.info='fault to get API'})
   }
 }
