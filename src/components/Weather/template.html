@@ -12,6 +12,7 @@
           <v-overflow-btn
             :items="dropdown_wide"
             label="広域エリア"
+            segmented
             target="#dropdown-example"
           ></v-overflow-btn>
         </v-flex>
@@ -20,7 +21,7 @@
           <!--<p>小規模エリア</p>-->
 
           <v-overflow-btn
-            :items="dropdown_close"
+            :items="dropdown_close_selected"
             label="小規模エリア"
             segmented
             target="#dropdown-example"

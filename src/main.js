@@ -12,6 +12,8 @@ Vue.use(Vuetify)
 //完全に空 EventHub
 window.eventHub = new Vue()
 
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

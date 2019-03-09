@@ -20,6 +20,7 @@ export default{
 
       dropdown_wide: [],
       dropdown_close: [],
+      dropdown_close_selected:[],
 
 
       num: 1
@@ -61,25 +62,34 @@ export default{
     getLocation: function(){
       axios
         .get('http://weather.livedoor.com/forecast/rss/primary_area.xml',{responseType:'document'})
-    .then(responseXml =>{
-          //広域エリアリストにプッシュ（配列）
+        .then(responseXml =>{
+          //広域エリアリストにプッシュ（連想配列）
           var prefLength = responseXml['data'].getElementsByTagName('pref').length
           for(var i=0; i<prefLength; i++){
-            this.$set(this.dropdown_wide, i, responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
-            //小規模エリアリストにプッシュ（連想配列）ひとまず東京の情報を取得 16=東京
+            // this.$set(this.dropdown_wide, i, responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
+            this.dropdown_wide.push({
+              text:responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent,
+              callback:()=> console.log(responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
+            })
+
+            //小規模エリアリストにプッシュ（連想配列）
             var childrenLength=responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city').length
             for(var j=0; j<childrenLength; j++){
               this.dropdown_close.push({
                 area:responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent,
-                title: responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city')[j].attributes['title'].textContent,
+                text: responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city')[j].attributes['title'].textContent,
                 id: responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city')[j].attributes['id'].textContent,
                 callback: () => console.log(responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city')[j].attributes['title'].textContent)
               })
             }
           }
-          console.log('wide : '+ this.dropdown_wide)
+          this.dropdown_close_selected = this.dropdown_close.concat()
+          console.log(this.dropdown_wide)
           console.log(childrenLength)
           console.log(this.dropdown_close)
+          console.log(this.dropdown_close_selected)
+          console.log('道南')//関数の動作確認（決め打ち）
+          this.filterCity("道南")
 
 
           // this.areaName=responseXml['data'].getElementsByTagName('pref')[20].attributes['title'].textContent
@@ -92,13 +102,24 @@ export default{
           // console.log('city ID : '+this.cityId)
           // console.log('city Code : '+this.cityCode)
         })
+    },
+    
+    
+    
+    filterCity: function (key) {
+      // area と同じ text (都市名)のものを selected に入れる
+      this.dropdown_close_selected=[]
+      for(key in this.dropdown_close){
+        this.dropdown_close_selected.push({
+          text:this.dropdown_close[key].text,
+          callback: () => console.log(this.dropdown_close[key].text)
+        })
+      }
+      console.log("area="+key)
+      console.log(this.dropdown_close_selected)
     }
 
-
-
   },
-
-
 
 
 
