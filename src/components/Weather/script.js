@@ -89,7 +89,7 @@ export default{
           console.log(this.dropdown_close)
           console.log(this.dropdown_close_selected)
           console.log('道南')//関数の動作確認（決め打ち）
-          this.filterCity("道南")
+          this.filterCity("")
 
 
           // this.areaName=responseXml['data'].getElementsByTagName('pref')[20].attributes['title'].textContent
