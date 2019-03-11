@@ -13,13 +13,14 @@ export default{
       iconUrl:null,
       cityCode:130010,
       bottomNav: '',
+      area:"",
       areaName:'',
       cityName:'',
       cityId:'',
 
 
-      dropdown_wide: [],
-      dropdown_close: [],
+      dropdownWide: [],
+      dropdownClose: [],
       dropdown_close_selected:[],
 
 
@@ -34,10 +35,11 @@ export default{
     // クリックするとAPI取得ができるメソッド
     //天気情報の取得
     getWeatherData: function () {
+      let url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=' + this.cityCode//Idにすると404が出る、要質問
       // リストIdから情報の取得
       //APIの読み込み
       axios
-        .get('http://weather.livedoor.com/forecast/webservice/json/v1?city=' + this.cityCode)//Idにすると404が出る、要質問
+        .get(url)
         .then(response => {
           for(var num=0; num<response['data']['forecasts'].length; num++) {
             this.dateLabel = response['data']['forecasts'][this.num]["dateLabel"]
@@ -64,18 +66,18 @@ export default{
         .get('http://weather.livedoor.com/forecast/rss/primary_area.xml',{responseType:'document'})
         .then(responseXml =>{
           //広域エリアリストにプッシュ（連想配列）
-          var prefLength = responseXml['data'].getElementsByTagName('pref').length
-          for(var i=0; i<prefLength; i++){
-            // this.$set(this.dropdown_wide, i, responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
-            this.dropdown_wide.push({
+          let prefLength = responseXml['data'].getElementsByTagName('pref').length
+          for(let i=0; i<prefLength; i++){
+            // this.$set(this.dropdownWide, i, responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
+            this.dropdownWide.push({
               text:responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent,
               callback:()=> console.log(responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent)
             })
 
             //小規模エリアリストにプッシュ（連想配列）
-            var childrenLength=responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city').length
-            for(var j=0; j<childrenLength; j++){
-              this.dropdown_close.push({
+            let childrenLength=responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city').length
+            for(let j=0; j<childrenLength; j++){
+              this.dropdownClose.push({
                 area:responseXml['data'].getElementsByTagName('pref')[i].attributes['title'].textContent,
                 text: responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city')[j].attributes['title'].textContent,
                 id: responseXml['data'].getElementsByTagName('pref')[i].getElementsByTagName('city')[j].attributes['id'].textContent,
@@ -83,40 +85,41 @@ export default{
               })
             }
           }
-          this.dropdown_close_selected = this.dropdown_close.concat()
-          console.log(this.dropdown_wide)
-          console.log(childrenLength)
-          console.log(this.dropdown_close)
-          console.log(this.dropdown_close_selected)
-          console.log('道南')//関数の動作確認（決め打ち）
-          this.filterCity("")
-
-
-          // this.areaName=responseXml['data'].getElementsByTagName('pref')[20].attributes['title'].textContent
-          // this.cityName=responseXml['data'].getElementsByTagName('pref')[20].getElementsByTagName('city')[0].attributes['title'].textContent
-          // this.cityId=responseXml['data'].getElementsByTagName('pref')[20].getElementsByTagName('city')[0].attributes['id'].textContent+''
-          // // console.log(responseXml)
-          // console.log(this.dropdown_wide)
-          // console.log(this.areaName)
-          // console.log(this.cityName)
-          // console.log('city ID : '+this.cityId)
-          // console.log('city Code : '+this.cityCode)
+          //表示用配列にデータを渡す(広域で選択していないときは全件表示)
+          this.dropdownCloseSelected = this.dropdownClose
+          console.log('dropdownCloseSelected')
+          console.log(this.dropdownCloseSelected)
         })
     },
     
     
     
-    filterCity: function (key) {
+    filterCity: function (areaName=this.area) {
       // area と同じ text (都市名)のものを selected に入れる
-      this.dropdown_close_selected=[]
-      for(key in this.dropdown_close){
-        this.dropdown_close_selected.push({
-          text:this.dropdown_close[key].text,
-          callback: () => console.log(this.dropdown_close[key].text)
-        })
-      }
-      console.log("area="+key)
-      console.log(this.dropdown_close_selected)
+      //表示配列の初期化
+      this.dropdownCloseSelected = []
+      //引数のエリア名に一致する要素をフィルターして代入
+      this.dropdownCloseSelected = this.dropdownClose.filter(dropdownClose => dropdownClose.area === areaName)
+
+      // console.log('filterCity')
+      // console.log(this.dropdownCloseSelected)
+    },
+
+
+
+
+
+
+    // イベントハンドラ
+    onSetWideArea:function(areaName){
+      //広域エリア選択時のイベント
+      //表示用配列のフィルタ
+      this.filterCity(areaName)
+    },
+
+    onSetCloseArea: function(){
+      //都市選択時のイベント
+      this.getWeatherData()
     }
 
   },
