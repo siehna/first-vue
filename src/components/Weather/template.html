@@ -7,64 +7,65 @@
 
       <v-layout row wrap id="dropdown-example"  grid-list-xl>
         <v-flex xs12 sm6>
-          <v-overflow-btn
-            :items="dropdownWide"
+          <v-select
+            :items="prefectures"
+            v-model="selectedPrefecture"
+            item-text="title"
             label="広域エリア"
-            segmented
-            v-model="area"
             target="#dropdown-example"
-            @change="onSetWideArea()"
-          ></v-overflow-btn>
+            return-object
+          ></v-select><!--オブジェクトを返す時は明示的に宣言する-->
         </v-flex>
 
         <v-flex xs12 sm6>
-          <v-overflow-btn
-            :items="dropdownCloseSelected"
+          <v-select
+            :items="selectedPrefecture.cities"
+            item-text="text"
             label="小規模エリア"
-            segmented
-            v-model="city"
+            v-model="selectedCity"
             target="#dropdown-example"
             @change="onSetCloseArea"
-          ></v-overflow-btn>
+            return-object
+          ></v-select>
         </v-flex>
       </v-layout>
 
 
       <v-layout grid-list-xl>
         <!--今日-->
-        <v-card xs12 sm6>
+        <v-card xs12 sm12>
           <v-card-title class="font-weight-bold">
-            {{ dateLabel }}の天気
+            {{ dateLabel[0] }}の天気
           </v-card-title>
 
-          <p>{{ telop }}</p><br/>
-          <p>最低気温 {{ min }} ℃</p><br/>
-          <p>最高気温 {{ max }} ℃</p><br/>
-          <p>{{ date }}</p>
+          <p>{{ telop[0] }}</p><br/>
+          <p>最低気温 {{ min[0] }} ℃</p><br/>
+          <p>最高気温 {{ max[0] }} ℃</p><br/>
+          <p>{{ date[0] }}</p>
         </v-card>
 
         <!--明日-->
-        <v-card xs12 sm6>
+        <v-card xs12 sm12>
           <v-card-title class="font-weight-bold">
-            {{ dateLabel }}の天気
+            {{ dateLabel[1] }}の天気
           </v-card-title>
 
-          <p>{{ telop }}</p><br/>
-          <p>最低気温 {{ min }} ℃</p><br/>
-          <p>最高気温 {{ max }} ℃</p><br/>
-          <p>{{ date }}</p>
+          <p>{{ telop[1] }}</p><br/>
+          <p>最低気温 {{ min[1] }} ℃</p><br/>
+          <p>最高気温 {{ max[1] }} ℃</p><br/>
+          <p>{{ date[1] }}</p>
         </v-card>
 
         <!--明後日-->
-        <v-card xs12 sm6>
+        <v-card xs12 sm12>
           <v-card-title class="font-weight-bold">
-            {{ dateLabel }}の天気
+            {{ dateLabel[2] }}の天気
           </v-card-title>
 
-          <p>{{ telop }}</p><br/>
-          <p>最低気温 {{ min }} ℃</p><br/>
-          <p>最高気温 {{ max }} ℃</p><br/>
-          <p>{{ date }}</p>
+          <p>{{ telop[2] }}</p><br/>
+          <p>最低気温 {{ min[2] }} ℃</p><br/>
+          <p>最高気温 {{ max[2] }} ℃</p><br/>
+          <p>{{ date[2] }}</p>
         </v-card>
       </v-layout>
 

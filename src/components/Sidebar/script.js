@@ -9,7 +9,7 @@ export default {
       ]
     }
   },
-  method :{
+  methods: {
     reverseDrawer:function(){
       this.drawer = !this.drawer
     // if(this.drawer){
