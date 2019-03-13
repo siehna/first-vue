@@ -2,7 +2,7 @@
   <v-container>
     <v-card height="100%" flat>
 
-      <v-layout row wrap id="dropdown-example" grid-list-sm>
+      <v-layout row wrap id="dropdown-example" grid-list-xl>
         <v-flex xs12 sm6>
           <v-select
             :items="prefectures"
@@ -50,7 +50,7 @@
             </v-layout>
 
             <br/>
-            <p>{{ date[1] }}</p>
+            <p>{{ date[0] }}</p>
           </v-card>
         </v-flex>
 
@@ -61,10 +61,20 @@
             <v-card-title class="font-weight-bold">
               {{ dateLabel[1] }}の天気 : {{ telop[1] }}
             </v-card-title>
+
+            <v-layout row justify-center>
+              <v-flex xs2>
+                <img :src="iconUrl[1]">
+              </v-flex>
+              <v-flex xs4>
+                <div>
+                  最高気温 {{ max[1] }} ℃<br/>
+                  最低気温 {{ min[1] }} ℃
+                </div>
+              </v-flex>
+            </v-layout>
+
             <br/>
-            <img :src="iconUrl[1]">
-            <p>最高気温 {{ max[1] }} ℃</p><br/>
-            <p>最低気温 {{ min[1] }} ℃</p><br/>
             <p>{{ date[1] }}</p>
           </v-card>
         </v-flex>
@@ -76,59 +86,69 @@
             <v-card-title class="font-weight-bold">
               {{ dateLabel[2] }}の天気 : {{ telop[2] }}
             </v-card-title>
+
+            <v-layout row justify-center>
+              <v-flex xs2>
+                <img :src="iconUrl[2]">
+              </v-flex>
+              <v-flex xs4>
+                <div>
+                  最高気温 {{ max[2] }} ℃<br/>
+                  最低気温 {{ min[2] }} ℃
+                </div>
+              </v-flex>
+            </v-layout>
+
             <br/>
-            <img :src="iconUrl[2]">
-            <p>最高気温 {{ max[2] }} ℃</p><br/>
-            <p>最低気温 {{ min[2] }} ℃</p><br/>
             <p>{{ date[2] }}</p>
           </v-card>
         </v-flex>
       </v-layout>
 
-      <p> {{ text }}</p>
-      <!--&lt;!&ndash;概況ボタン&ndash;&gt;-->
-      <!--<div class="text-xs-center">-->
-      <!--<v-dialog-->
-      <!--v-model="dialog"-->
-      <!--width="650"-->
-      <!--&gt;-->
-      <!--<template v-slot:activator="{ on }">-->
+      <!--<p> {{ text }}</p>-->
+      <!--概況ボタン-->
+      <div class="text-xs-center">
+      <v-dialog
+      v-model="dialog"
+      width="650"
+      >
+      <template v-slot:activator="{ on }">
+      <v-btn
+      color="red lighten-2"
+      dark
+      v-on="on"
+      >
+      詳細
+      </v-btn>
+      </template>
+
+      <v-card>
+      <v-card-title
+      class="headline grey darken-2"
+      primary-title
+      >
+      天気概況
+      </v-card-title>
+
+      <v-card-text>
+      {{ text }}
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-actions>
+      <v-spacer></v-spacer>
       <!--<v-btn-->
       <!--color="red lighten-2"-->
-      <!--dark-->
-      <!--v-on="on"-->
+      <!--flat-->
+      <!--@click="dialog = false"-->
       <!--&gt;-->
-      <!--詳細-->
+      <!--閉じる-->
       <!--</v-btn>-->
-      <!--</template>-->
-
-      <!--<v-card>-->
-      <!--<v-card-title-->
-      <!--class="headline grey darken-2"-->
-      <!--primary-title-->
-      <!--&gt;-->
-      <!--天気概況-->
-      <!--</v-card-title>-->
-
-      <!--<v-card-text>-->
-      <!--{{ text }}-->
-      <!--</v-card-text>-->
-
-      <!--<v-divider></v-divider>-->
-
-      <!--<v-card-actions>-->
-      <!--<v-spacer></v-spacer>-->
-      <!--&lt;!&ndash;<v-btn&ndash;&gt;-->
-      <!--&lt;!&ndash;color="red lighten-2"&ndash;&gt;-->
-      <!--&lt;!&ndash;flat&ndash;&gt;-->
-      <!--&lt;!&ndash;@click="dialog = false"&ndash;&gt;-->
-      <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-      <!--&lt;!&ndash;閉じる&ndash;&gt;-->
-      <!--&lt;!&ndash;</v-btn>&ndash;&gt;-->
-      <!--</v-card-actions>-->
-      <!--</v-card>-->
-      <!--</v-dialog>-->
-      <!--</div>-->
+      </v-card-actions>
+      </v-card>
+      </v-dialog>
+      </div>
 
 
       <!--日付と画像のボックス-->
