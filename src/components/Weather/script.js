@@ -5,22 +5,19 @@ export default {
   data() {
     return {
       //表示情報
-      info: '',
+      dialog: '',
       dateLabel: ['…', '…', '…'],
       telop: ['no data', 'no data', 'no data'],
       date: ['no date', 'no date', 'no date'],
       max: ['-', '-', '-'],
       min: ['-', '-', '-'],
       text: 'no text',
-      iconUrl: null,
+      iconUrl: [],
 
       //把持情報
       prefectures: [],
       selectedPrefecture: {},
       selectedCity: null,
-
-      //検証用データ
-      bottomNav: '',
 
       //選択エリア・都市名
       area: '',
@@ -58,8 +55,7 @@ export default {
 
             let prefecture = {
               title: prefTag.attributes['title'].textContent,
-              cities: [],
-              callback: () => console.log(prefTag.attributes['title'].textContent)
+              cities: []
             }
 
             //小規模エリアリストにプッシュ（連想配列）
@@ -69,15 +65,12 @@ export default {
               let cityTag = citiesTags[j]
               let city = {
                 text: cityTag.attributes['title'].textContent,
-                id: cityTag.attributes['id'].textContent,
-                callback: () => console.log(city.attributes['title'].textContent)
+                id: cityTag.attributes['id'].textContent
               }
               prefecture.cities.push(city)
             }
             prefectures.push(prefecture)
           }
-          console.log('prefectures')
-          console.log(prefectures)
           this.prefectures = prefectures
 
           //表示用配列にデータを渡す(広域で選択していないときは全件表示)
@@ -86,14 +79,6 @@ export default {
           // console.log(this.dropdownCloseSelected)
         })
     },
-    // エリア情報から都市の絞り込み
-    // filterCity: function () {
-    //   area と同じ text (都市名)のものを selected に入れる
-    //   表示配列の初期化
-    //   this.dropdownCloseSelected = []
-    //   引数のエリア名に一致する要素をフィルターして代入
-    //   this.dropdownCloseSelected = this.dropdownClose.filter(dropdownClose => dropdownClose.area === this.area)
-    // },
 
     //都市コードのセット
     setCityId: function () {
@@ -110,6 +95,7 @@ export default {
     getWeatherData: function () {
       console.log('#### getWeatherData')
       // リストIdから情報の取得
+      //　thisが使えないので変数に入れて使う
       let self = this
       //APIの読み込み
       axios
@@ -119,32 +105,24 @@ export default {
           console.log('forecasts')
           console.log(forecasts)
           for (let i = 0; i < forecasts.length; i++) {
-            console.log('i')
-            console.log(i)
             self.dateLabel[i] = forecasts[i].dateLabel
-            console.log('dateLabel')
-            console.log(this.dateLabel[i])
-            //dateLabelには情報が入っている
             self.telop[i] = forecasts[i].telop
-            console.log('telop')
-            console.log(this.telop[i])
-            //telopにも情報が入っている
 
-            // this.iconUrl[i] = response['data']['forecasts'][i]["image"]["url"]
+            this.iconUrl[i] = response['data']['forecasts'][i]["image"]["url"]
             self.date[i] = forecasts[i].date
-            console.log('min')
-            console.log(forecasts[i].temperature.min)
-            console.log('max')
-            console.log(forecasts[i].temperature.max)
-            if(forecasts[i].temperature.min === null || forecasts[i].temperature.max === null){
-            }else{
+            //最高・最低気温の取得
+            if (forecasts[i].temperature.min === null || forecasts[i].temperature.max === null) {
+            } else {
               self.min[i] = forecasts[i].temperature.min.celsius
               self.max[i] = forecasts[i].temperature.max.celsius
             }
-            // console.log(response['data'])
+            if (forecasts[i].image.url === null) {
+            } else {
+              self.iconUrl[i] = forecasts[i].image.url
+              console.log('iconURL ' + i)
+              console.log(self.iconUrl[i])
+            }
           }
-          console.log('response')
-          console.log(response)
           self.text = response.data.description.text
         })
         .catch(err => {
@@ -153,38 +131,22 @@ export default {
         })
     },
 
-
     // イベントハンドラ
-
-    // onSetWideArea: function (areaName) {
-    //   // 広域エリア選択時のイベント
-    //   // 表示用配列のフィルタ
-    //   this.filterCity(areaName)
-    // },
-
     onSetCloseArea: function () {
       //都市選択時のイベント
       //cityIdの設定
       this.setCityId()
       //axiosでの天気情報取得
       this.getWeatherData()
-      //表示用に天気情報を入れる?
-      // console.log('dateLabel')
-      // console.log(this.dateLabel)
-      // console.log('max')
-      // console.log(this.max)
-      // console.log('min')
-      // console.log(this.min)
     }
 
   },
 
-
   mounted: function () {
     //ヘッダーへページ名のエミット
-    eventHub.$emit('change-title', 'Weather');
+    eventHub.$emit('change-title', 'Weather')
 
     //リスト情報の取得
-    this.getLocation();
+    this.getLocation()
   }
 }
