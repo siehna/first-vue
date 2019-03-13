@@ -6,9 +6,9 @@ export default {
     return {
       //表示情報
       info: '',
-      dateLabel: ['empty', 'empty', 'empty'],
+      dateLabel: ['…', '…', '…'],
       telop: ['no data', 'no data', 'no data'],
-      date: ['no data', 'no data', 'no data'],
+      date: ['no date', 'no date', 'no date'],
       max: ['-', '-', '-'],
       min: ['-', '-', '-'],
       text: 'no text',
@@ -33,11 +33,6 @@ export default {
       areaName: '',
       cityName: '',
       cityId: '',
-
-      //把持情報
-      dropdownWide: [],
-      dropdownClose: [],
-      dropdownCloseSelected: [],
     }
   },
 
@@ -79,38 +74,33 @@ export default {
               }
               prefecture.cities.push(city)
             }
-
             prefectures.push(prefecture)
           }
-
+          console.log('prefectures')
           console.log(prefectures)
           this.prefectures = prefectures
+
           //表示用配列にデータを渡す(広域で選択していないときは全件表示)
-          this.dropdownCloseSelected = this.dropdownClose
-          console.log('dropdownCloseSelected')
-          console.log(this.dropdownCloseSelected)
+          // this.dropdownCloseSelected = this.dropdownClose
+          // console.log('dropdownCloseSelected')
+          // console.log(this.dropdownCloseSelected)
         })
     },
-
-
-    //エリア情報から都市の絞り込み
-    filterCity: function () {
-      // area と同じ text (都市名)のものを selected に入れる
-      //表示配列の初期化
-      this.dropdownCloseSelected = []
-      //引数のエリア名に一致する要素をフィルターして代入
-      this.dropdownCloseSelected = this.dropdownClose.filter(dropdownClose => dropdownClose.area === this.area)
-
-      console.log('filterCity')
-      console.log(this.dropdownCloseSelected)
-    },
-
+    // エリア情報から都市の絞り込み
+    // filterCity: function () {
+    //   area と同じ text (都市名)のものを selected に入れる
+    //   表示配列の初期化
+    //   this.dropdownCloseSelected = []
+    //   引数のエリア名に一致する要素をフィルターして代入
+    //   this.dropdownCloseSelected = this.dropdownClose.filter(dropdownClose => dropdownClose.area === this.area)
+    // },
 
     //都市コードのセット
     setCityId: function () {
-      console.log("position check")
+      console.log('#### setCityId')
       //.attribute はxml用 　連想配列は次のようにドットを打つだけ
-      let code = this.dropdownCloseSelected.filter(dropdownCloseSelected => dropdownCloseSelected.text === this.city)[0].id
+      // let code = this.dropdownCloseSelected.filter(dropdownCloseSelected => dropdownCloseSelected.text === this.city)[0].id
+      let code = this.selectedCity.id
       this.requestUrl = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=' + code
       console.log("requestURL")
       console.log(this.requestUrl)
@@ -118,36 +108,59 @@ export default {
 
     //天気情報の取得
     getWeatherData: function () {
-      let url = this.requestUrl
+      console.log('#### getWeatherData')
       // リストIdから情報の取得
+      let self = this
       //APIの読み込み
       axios
-        .get(url)
+        .get(this.requestUrl)
         .then(response => {
-          for (let i = 0; i < response['data']['forecasts'].length; i++) {
-            this.dateLabel[i] = response['data']['forecasts'][i]["dateLabel"]
-            this.telop[i] = response['data']['forecasts'][i]["telop"]
+          let forecasts = response.data.forecasts
+          console.log('forecasts')
+          console.log(forecasts)
+          for (let i = 0; i < forecasts.length; i++) {
+            console.log('i')
+            console.log(i)
+            self.dateLabel[i] = forecasts[i].dateLabel
+            console.log('dateLabel')
+            console.log(this.dateLabel[i])
+            //dateLabelには情報が入っている
+            self.telop[i] = forecasts[i].telop
+            console.log('telop')
+            console.log(this.telop[i])
+            //telopにも情報が入っている
+
             // this.iconUrl[i] = response['data']['forecasts'][i]["image"]["url"]
-            this.date[i] = response['data']['forecasts'][i]["date"]
-            this.min[i] = response['data']['forecasts'][i]["temperature"]["min"]["celsius"]
-            this.max[i] = response['data']['forecasts'][i]["temperature"]["max"]["celsius"]
-            // this.info=response['data']['forecasts'][this.num]
+            self.date[i] = forecasts[i].date
+            console.log('min')
+            console.log(forecasts[i].temperature.min)
+            console.log('max')
+            console.log(forecasts[i].temperature.max)
+            if(forecasts[i].temperature.min === null || forecasts[i].temperature.max === null){
+            }else{
+              self.min[i] = forecasts[i].temperature.min.celsius
+              self.max[i] = forecasts[i].temperature.max.celsius
+            }
             // console.log(response['data'])
           }
-          this.text = response['data']['description']['text']
+          console.log('response')
+          console.log(response)
+          self.text = response.data.description.text
         })
         .catch(err => {
-          this.info = 'fault to get API'
+          console.log('FFFFFF fail')
+          console.error(err)
         })
     },
 
 
     // イベントハンドラ
-    onSetWideArea: function (areaName) {
-      //広域エリア選択時のイベント
-      //表示用配列のフィルタ
-      this.filterCity(areaName)
-    },
+
+    // onSetWideArea: function (areaName) {
+    //   // 広域エリア選択時のイベント
+    //   // 表示用配列のフィルタ
+    //   this.filterCity(areaName)
+    // },
 
     onSetCloseArea: function () {
       //都市選択時のイベント
@@ -156,12 +169,12 @@ export default {
       //axiosでの天気情報取得
       this.getWeatherData()
       //表示用に天気情報を入れる?
-      console.log('dateLabel')
-      console.log(this.dateLabel)
-      console.log('max')
-      console.log(this.max)
-      console.log('min')
-      console.log(this.min)
+      // console.log('dateLabel')
+      // console.log(this.dateLabel)
+      // console.log('max')
+      // console.log(this.max)
+      // console.log('min')
+      // console.log(this.min)
     }
 
   },
