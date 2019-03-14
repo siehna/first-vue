@@ -1,5 +1,4 @@
 import axios from 'axios'
-import WeatherCard from './WeatherCard/WeatherCard'
 
 export default {
   name: 'weather-component',
@@ -93,17 +92,34 @@ export default {
 
           for (let i = 0; i < forecasts.length; i++) {
             // 情報の取得
-            self.dateLabel[i] = forecasts[i].dateLabel
-            self.telop[i] = forecasts[i].telop
-            self.iconUrl[i] = response['data']['forecasts'][i]["image"]["url"]
-            self.date[i] = forecasts[i].date
+            if (forecasts[i].dateLabel === null) {
+            } else {
+              self.dateLabel[i] = forecasts[i].dateLabel
+            }
+            if (forecasts[i].telop === null) {
+              self.telop[i] = '-'
+            } else {
+              self.telop[i] = forecasts[i].telop
+            }
+            if (forecasts[i].image.url === null) {
+            } else {
+              self.iconUrl[i] = forecasts[i].image.url
+            }
+            if (forecasts[i].date === null) {
+              self.date[i] = '-'
+            } else {
+              self.date[i] = forecasts[i].date
+            }
 
+            ////////////////////////////////////////////////////////////
             //最高・最低気温の取得
             if (forecasts[i].temperature.min === null) {
+              self.temperature.min[i] = '-'
             } else {
               self.temperature.min[i] = forecasts[i].temperature.min.celsius
             }
             if (forecasts[i].temperature.max === null) {
+              self.temperature.max[i] = '-'
             } else {
               self.temperature.max[i] = forecasts[i].temperature.max.celsius
             }

@@ -22,7 +22,3 @@ new Vue({
   template: '<App/>'
 })
 
-
-new Vue({
-  el: '#weatherCard'
-})
