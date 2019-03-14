@@ -92,26 +92,28 @@ export default {
 
           for (let i = 0; i < forecasts.length; i++) {
             // 情報の取得
+            //今日明日明後日
             if (forecasts[i].dateLabel === null) {
             } else {
               self.dateLabel[i] = forecasts[i].dateLabel
             }
+            //天気
             if (forecasts[i].telop === null) {
               self.telop[i] = '-'
             } else {
               self.telop[i] = forecasts[i].telop
             }
+            //アイコン
             if (forecasts[i].image.url === null) {
             } else {
               self.iconUrl[i] = forecasts[i].image.url
             }
+            // 日付
             if (forecasts[i].date === null) {
               self.date[i] = '-'
             } else {
               self.date[i] = forecasts[i].date
             }
-
-            ////////////////////////////////////////////////////////////
             //最高・最低気温の取得
             if (forecasts[i].temperature.min === null) {
               self.temperature.min[i] = '-'
