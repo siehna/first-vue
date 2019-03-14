@@ -21,3 +21,8 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+
+new Vue({
+  el: '#weatherCard'
+})

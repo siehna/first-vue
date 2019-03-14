@@ -1,0 +1,24 @@
+<v-layout row wrap grid-list-xl>
+  <v-flex xs12 sm4>
+    <v-card>
+      <v-card-title class="font-weight-bold">
+        {{ dateLabel[0] }}の天気 : {{ telop[0] }}
+      </v-card-title>
+
+      <v-layout row justify-center>
+        <v-flex xs4>
+          <img :src="iconUrl[0]">
+        </v-flex>
+        <v-flex xs4>
+          <div>
+            最高気温 {{ max[0] }} ℃<br/>
+            最低気温 {{ min[0] }} ℃
+          </div>
+        </v-flex>
+      </v-layout>
+
+      <br/>
+      <p>{{ date[0] }}</p>
+    </v-card>
+  </v-flex>
+</v-layout>
