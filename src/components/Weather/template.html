@@ -1,222 +1,102 @@
-<div>
-  <v-container>
-    <v-card height="100%" flat>
+<v-container>
+  <v-card height="100%" flat>
 
-       <!--ドロップダウン-->
-      <v-layout row wrap id="dropdown-example" grid-list-xl>
-        <v-flex xs12 sm6>
-          <v-select
-            :items="prefectures"
-            v-model="selectedPrefecture"
-            item-text="areaName"
-            label="広域エリア"
-            target="#dropdown-example"
-            return-object
-          ></v-select><!--オブジェクトを返す時は明示的に宣言する-->
-        </v-flex>
+    <!--ドロップダウン-->
+    <v-layout row wrap id="dropdown-example" grid-list-xl>
+      <v-flex xs12 sm6>
+        <v-select
+          :items="prefectures"
+          v-model="selectedPrefecture"
+          item-text="areaName"
+          label="広域エリア"
+          return-object
+        ></v-select><!--オブジェクトを返す時は明示的に宣言する-->
+      </v-flex>
 
-        <v-flex xs12 sm6>
-          <v-select
-            :items="selectedPrefecture.cities"
-            item-text="cityName"
-            label="小規模エリア"
-            v-model="selectedCity"
-            target="#dropdown-example"
-            @change="onSetCloseArea"
-            return-object
-          ></v-select>
-        </v-flex>
-      </v-layout>
+      <v-flex xs12 sm6>
+        <v-select
+          :items="selectedPrefecture.cities"
+          item-text="cityName"
+          label="小規模エリア"
+          v-model="selectedCity"
+          @change="onSetCloseArea"
+          return-object
+        ></v-select>
+      </v-flex>
+    </v-layout>
 
 
-      <!--コンテンツ-->
-      <v-layout row wrap grid-list-xl>
-        <v-flex xs12 sm4>
-          <v-card>
-            <v-card-title class="font-weight-bold">
-              {{ weatherInfo.dateLabel[1] }}の天気 : {{ weatherInfo.telop[1] }}
-            </v-card-title>
+    <!--コンテンツ-->
+    <v-layout row wrap grid-list-xl>
+      <v-flex xs12 sm4 v-for="(weatherInf,index) in weatherInfo" :key="weatherInf.dateLabel">
+        <v-card>
+          <v-card-title class="font-weight-bold">
+            {{ weatherInfo[index].dateLabel }}の天気 : {{ weatherInfo[index].telop }}
+          </v-card-title>
 
-            <v-layout row justify-center>
-              <v-flex xs4>
-                <img :src="weatherInfo.iconUrl[1]">
-              </v-flex>
-              <v-flex xs4>
-                <div>
-                  最高気温 {{ weatherInfo.temperature.max[1] }} ℃<br/>
-                  最低気温 {{ weatherInfo.temperature.min[1] }} ℃
-                </div>
-              </v-flex>
-            </v-layout>
+          <v-layout row justify-center>
+            <v-flex xs4>
+              <img :src="weatherInfo[index].image.url">
+            </v-flex>
+            <v-flex xs4>
+              <div>
+                最高気温 {{ weatherInfo[index].temperature.max.celsius }} ℃<br/>
+                最低気温 {{ weatherInfo[index].temperature.min.celsius }} ℃
+              </div>
+            </v-flex>
+          </v-layout>
 
-            <br/>
-            <p>{{ weatherInfo.date[1] }}</p>
-          </v-card>
-        </v-flex>
-      </v-layout>
-
-      <!--決め打ち-->
-      <!--<v-layout row wrap grid-list-xl>-->
-        <!--&lt;!&ndash;今日&ndash;&gt;-->
-        <!--<v-flex xs12 sm4>-->
-          <!--<v-card>-->
-            <!--<v-card-title class="font-weight-bold">-->
-              <!--{{ dateLabel[0] }}の天気 : {{ telop[0] }}-->
-            <!--</v-card-title>-->
-
-            <!--<v-layout row justify-center>-->
-              <!--<v-flex xs4>-->
-                <!--<img :src="iconUrl[0]">-->
-              <!--</v-flex>-->
-              <!--<v-flex xs4>-->
-                <!--<div>-->
-                  <!--最高気温 {{ max[0] }} ℃<br/>-->
-                  <!--最低気温 {{ min[0] }} ℃-->
-                <!--</div>-->
-              <!--</v-flex>-->
-            <!--</v-layout>-->
-
-            <!--<br/>-->
-            <!--<p>{{ date[0] }}</p>-->
-          <!--</v-card>-->
-        <!--</v-flex>-->
+          <br/>
+          <p>{{ weatherInfo[index].date }}</p>
+        </v-card>
+      </v-flex>
+    </v-layout>
 
 
-        <!--&lt;!&ndash;明日&ndash;&gt;-->
-        <!--<v-flex xs12 sm4>-->
-          <!--<v-card>-->
-            <!--<v-card-title class="font-weight-bold">-->
-              <!--{{ dateLabel[1] }}の天気 : {{ telop[1] }}-->
-            <!--</v-card-title>-->
-
-            <!--<v-layout row justify-center>-->
-              <!--<v-flex xs4>-->
-                <!--<img :src="iconUrl[1]">-->
-              <!--</v-flex>-->
-              <!--<v-flex xs4>-->
-                <!--<div>-->
-                  <!--最高気温 {{ max[1] }} ℃<br/>-->
-                  <!--最低気温 {{ min[1] }} ℃-->
-                <!--</div>-->
-              <!--</v-flex>-->
-            <!--</v-layout>-->
-
-            <!--<br/>-->
-            <!--<p>{{ date[1] }}</p>-->
-          <!--</v-card>-->
-        <!--</v-flex>-->
-
-
-        <!--&lt;!&ndash;明後日&ndash;&gt;-->
-        <!--<v-flex xs12 sm4>-->
-          <!--<v-card>-->
-            <!--<v-card-title class="font-weight-bold">-->
-              <!--{{ dateLabel[2] }}の天気 : {{ telop[2] }}-->
-            <!--</v-card-title>-->
-
-            <!--<v-layout row justify-center>-->
-              <!--<v-flex xs4>-->
-                <!--<img :src="iconUrl[2]">-->
-              <!--</v-flex>-->
-              <!--<v-flex xs4>-->
-                <!--<div>-->
-                  <!--最高気温 {{ max[2] }} ℃<br/>-->
-                  <!--最低気温 {{ min[2] }} ℃-->
-                <!--</div>-->
-              <!--</v-flex>-->
-            <!--</v-layout>-->
-
-            <!--<br/>-->
-            <!--<p>{{ date[2] }}</p>-->
-          <!--</v-card>-->
-        <!--</v-flex>-->
-      <!--</v-layout>-->
-
-
-
-      <!--概況ボタン-->
-      <div class="text-xs-center">
+    <!--概況ボタン-->
+    <div class="text-xs-center">
       <v-dialog
-      v-model="dialog"
-      width="650"
+        v-model="dialog"
+        width="650"
       >
-      <template v-slot:activator="{ on }">
-      <v-btn
-      color="red lighten-2"
-      dark
-      v-on="on"
-      >
-      詳細
-      </v-btn>
-      </template>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            color="red lighten-2"
+            dark
+            v-on="on"
+          >
+            詳細
+          </v-btn>
+        </template>
 
-      <v-card>
-      <v-card-title
-      class="headline grey darken-2"
-      primary-title
-      >
-      天気概況
-      </v-card-title>
+        <v-card>
+          <v-card-title
+            class="headline grey darken-2"
+            primary-title
+          >
+            天気概況
+          </v-card-title>
 
-      <v-card-text>
-      {{ weatherInfo.weatherSummary }}
-      </v-card-text>
+          <v-card-text>
+            {{ weatherSummary }}
+          </v-card-text>
 
-      <v-divider></v-divider>
+          <v-divider></v-divider>
 
-      <v-card-actions>
-      <v-spacer></v-spacer>
-      <!--<v-btn-->
-      <!--color="red lighten-2"-->
-      <!--flat-->
-      <!--@click="dialog = false"-->
-      <!--&gt;-->
-      <!--閉じる-->
-      <!--</v-btn>-->
-      </v-card-actions>
-      </v-card>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <!--<v-btn-->
+            <!--color="red lighten-2"-->
+            <!--flat-->
+            <!--@click="dialog = false"-->
+            <!--&gt;-->
+            <!--閉じる-->
+            <!--</v-btn>-->
+          </v-card-actions>
+        </v-card>
       </v-dialog>
-      </div>
+    </div>
 
+  </v-card>
+</v-container>
 
-      <!--日付と画像のボックス-->
-      <!--<img src={{ iconUrl }}><br/>-->
-      <!--<h2>{{ info }}</h2><br/><br/>-->
-
-
-      <!--ボタンナビゲーション-->
-      <!--<v-bottom-nav-->
-      <!--:active.sync="bottomNav"-->
-      <!--:value="true"-->
-      <!--absolute-->
-      <!--color="transparent"-->
-      <!--&gt;-->
-      <!--<v-btn-->
-      <!--color="teal"-->
-      <!--v-on:click="pickUpData()"-->
-      <!--&gt;-->
-      <!--<span>Today</span>-->
-      <!--<v-icon>today</v-icon>-->
-      <!--</v-btn>-->
-
-      <!--<v-btn-->
-      <!--color="teal"-->
-      <!--v-on:click="pickUpData()"-->
-      <!--&gt;-->
-      <!--<span>Tomorrow</span>-->
-      <!--<v-icon>filter_1</v-icon>-->
-      <!--</v-btn>-->
-
-      <!--<v-btn-->
-      <!--color="teal"-->
-      <!--v-on:click="pickUpData()"-->
-      <!--&gt;-->
-      <!--<span>2days Tomorrow</span>-->
-      <!--<v-icon>filter_2</v-icon>-->
-      <!--</v-btn>-->
-      <!--</v-bottom-nav>-->
-
-
-    </v-card>
-  </v-container>
-</div>
