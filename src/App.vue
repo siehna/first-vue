@@ -13,7 +13,7 @@
    import Sidebar from '@/components/Sidebar/Sidebar'
 
   export default {
-    el: '#app',
+    // el: '#app',
     name: 'app',
     components: {
       ContentHeader,
