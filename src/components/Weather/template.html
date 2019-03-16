@@ -29,6 +29,7 @@
     <!--コンテンツ-->
     <v-layout row wrap grid-list-xl>
       <v-flex xs12 sm4 v-for="(weatherInf,index) in weatherInfo" :key="weatherInf.dateLabel">
+        <!--カードここから-->
         <v-card>
           <v-card-title class="font-weight-bold">
             {{ weatherInfo[index].dateLabel }}の天気 : {{ weatherInfo[index].telop }}
@@ -49,6 +50,7 @@
           <br/>
           <p>{{ weatherInfo[index].date }}</p>
         </v-card>
+        <!--カードここまで-->
       </v-flex>
     </v-layout>
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import WeatherCard from './WeatgerCard/WeatherCard'
 
 export default {
   name: 'weather-component',
@@ -99,13 +100,6 @@ export default {
 
           console.log('weatherInfo')
           console.log(self.weatherInfo)
-          //
-          // console.log('url')
-          // console.log(self.weatherInfo[0].image.url)
-          //
-          // console.log('max')
-          // console.log(self.weatherInfo[0].temperature.max.celsius)
-          self.weatherSummary = response.data.description.text
         })
         .catch(err => {
           console.error(err)
