@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Todo from '@/components/Todo/Todo'
 import CustomTodo from '@/components/CustomTodo/CustomTodo'
 import Weather from '@/components/Weather/Weather'
+import WeeklyWeather from '@/components/WeeklyWeather/WeeklyWeather'
 // import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       path:'/weather',
       name:'Weather',
       component: Weather
+    },
+    {
+      path:'/weekly',
+      name:'WeeklyWeather',
+      component:WeeklyWeather
     }
   ]
 })

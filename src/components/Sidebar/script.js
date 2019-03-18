@@ -5,7 +5,8 @@ export default {
       items: [
         {title: 'Todo', link: '/'},
         {title: 'CustomTodo', link: '/custom'},
-        {title: 'Weather', link: '/weather'}
+        {title: 'Weather', link: '/weather'},
+        {title: 'WeeklyWeather', link:'weekly'}
       ]
     }
   },
