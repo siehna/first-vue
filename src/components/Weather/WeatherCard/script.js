@@ -1,3 +1,3 @@
 export default {
-  props:['weatherInf']
+  props: ['weatherInf']
 }

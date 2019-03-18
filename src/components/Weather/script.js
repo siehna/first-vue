@@ -3,7 +3,7 @@ import WeatherCard from '@/components/Weather/WeatherCard/WeatherCard'
 
 export default {
   name: 'weather-component',
-  components:{WeatherCard},
+  components: {WeatherCard},
   data() {
     return {
       //表示情報
@@ -83,26 +83,22 @@ export default {
         .get(this.requestUrl)
         .then(response => {
           self.weatherInfo = response.data.forecasts
-          for(let i=0; i<self.weatherInfo.length; i++){
+          for (let i = 0; i < self.weatherInfo.length; i++) {
             let temperature = self.weatherInfo[i].temperature
-            if(temperature.min === null){
+            if (temperature.min === null) {
               // temperature.min.push({celsius:'-'})
               temperature.min = {
                 celsius: '-'
               }
             }
-            if(temperature.max === null){
+            if (temperature.max === null) {
               // temperature.max.celsius = '-'
               temperature.max = {
                 celsius: '-'
               }
             }
           }
-
           self.weatherSummary = response.data.description.text
-
-          console.log('weatherInfo')
-          console.log(self.weatherInfo)
         })
         .catch(err => {
           console.error(err)

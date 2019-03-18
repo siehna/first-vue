@@ -9,8 +9,8 @@
 </template>
 
 <script>
-   import ContentHeader from '@/components/Header/Header'
-   import Sidebar from '@/components/Sidebar/Sidebar'
+  import ContentHeader from '@/components/Header/Header'
+  import Sidebar from '@/components/Sidebar/Sidebar'
 
   export default {
     // el: '#app',
@@ -26,6 +26,7 @@
   body {
     background: #303030;
   }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
