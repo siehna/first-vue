@@ -25,35 +25,15 @@
       </v-flex>
     </v-layout>
 
-
     <!--コンテンツ-->
     <v-layout row wrap grid-list-xl>
       <v-flex xs12 sm4 v-for="(weatherInf,index) in weatherInfo" :key="weatherInf.dateLabel">
-        <!--カードここから-->
-        <v-card>
-          <v-card-title class="font-weight-bold">
-            {{ weatherInfo[index].dateLabel }}の天気 : {{ weatherInfo[index].telop }}
-          </v-card-title>
-
-          <v-layout row justify-center>
-            <v-flex xs4>
-              <img :src="weatherInfo[index].image.url">
-            </v-flex>
-            <v-flex xs4>
-              <div>
-                最高気温 {{ weatherInfo[index].temperature.max.celsius }} ℃<br/>
-                最低気温 {{ weatherInfo[index].temperature.min.celsius }} ℃
-              </div>
-            </v-flex>
-          </v-layout>
-
-          <br/>
-          <p>{{ weatherInfo[index].date }}</p>
-        </v-card>
-        <!--カードここまで-->
+        <!--データ構造体を渡す-->
+        <WeatherCard
+          :weatherInf="weatherInf"
+        ></WeatherCard>
       </v-flex>
     </v-layout>
-
 
     <!--概況ボタン-->
     <div class="text-xs-center">

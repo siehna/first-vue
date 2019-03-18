@@ -1,8 +1,9 @@
 import axios from 'axios'
-import WeatherCard from './WeatgerCard/WeatherCard'
+import WeatherCard from '@/components/Weather/WeatherCard/WeatherCard'
 
 export default {
   name: 'weather-component',
+  components:{WeatherCard},
   data() {
     return {
       //表示情報
@@ -74,7 +75,7 @@ export default {
     //天気情報の取得
     getWeatherData: function () {
       // カードの情報をつっこむ
-      //　thisが使えないので変数に入れて使う ついでにweather付けとくとコード量減
+      //　thisが使えないので変数に入れて使う ついでにweather付けとくとコード量減 ?
       let self = this
 
       //APIの読み込み
@@ -98,6 +99,8 @@ export default {
             }
           }
 
+          self.weatherSummary = response.data.description.text
+
           console.log('weatherInfo')
           console.log(self.weatherInfo)
         })
@@ -115,6 +118,7 @@ export default {
       this.getWeatherData()
     }
   },
+
 
   mounted: function () {
     //ヘッダーへページ名のエミット
