@@ -1,3 +1,3 @@
-<template src="./template.html"></template>
-<script src="./script.js"></script>
-<style src="./style.css" scoped></style>
+<template src="./WeeklyWeather.html"></template>
+<script src="./WeeklyWeather.js"></script>
+<style src="./WeeklyWeather.css" scoped></style>

@@ -1,3 +1,3 @@
-<template src="./template.html"></template>
-<script src="./script.js"></script>
-<style scoped src="./style.css"></style>
+<template src="./Sidebar.html"></template>
+<script src="./Sidebar.js"></script>
+<style scoped src="./Sidebar.css"></style>
