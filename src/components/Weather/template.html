@@ -27,10 +27,10 @@
 
     <!--コンテンツ-->
     <v-layout row wrap grid-list-xl>
-      <v-flex xs12 sm4 v-for="(weatherInf,index) in weatherInfo" :key="weatherInf.dateLabel">
+      <v-flex xs12 sm4 v-for="weatherInfo in weatherInfoList" :key="weatherInfo.dateLabel">
         <!--データ構造体を渡す-->
         <WeatherCard
-          :weatherInf="weatherInf"
+          :weatherInfo="weatherInfo"
         ></WeatherCard>
       </v-flex>
     </v-layout>

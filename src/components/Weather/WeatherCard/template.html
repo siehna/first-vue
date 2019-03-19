@@ -1,20 +1,20 @@
 <v-card>
   <v-card-title class="font-weight-bold">
-    {{ weatherInf.dateLabel }}の天気 : {{ weatherInf.telop }}
+    {{ weatherInfo.dateLabel }}の天気 : {{ weatherInfo.telop }}
   </v-card-title>
 
   <v-layout row justify-center>
     <v-flex xs4>
-      <img :src="weatherInf.image.url">
+      <img :src="weatherInfo.image.url">
     </v-flex>
     <v-flex xs4>
       <div>
-        最高気温 {{ weatherInf.temperature.max.celsius }} ℃<br/>
-        最低気温 {{ weatherInf.temperature.min.celsius }} ℃
+        最高気温 {{ weatherInfo.temperature.max.celsius }} ℃<br/>
+        最低気温 {{ weatherInfo.temperature.min.celsius }} ℃
       </div>
     </v-flex>
   </v-layout>
 
   <br/>
-  <p>{{ weatherInf.date }}</p>
+  <p>{{ weatherInfo.date }}</p>
 </v-card>

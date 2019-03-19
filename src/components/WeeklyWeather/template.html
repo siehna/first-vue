@@ -1,0 +1,23 @@
+<v-container>
+  <v-card height="100%" flat>
+    <!--ドロップダウン-->
+    <v-layout row wrap id="dropdown" grid-list-xl>
+      <v-flex xs12 sm4>
+        <v-select
+          :items="prefectures"
+          v-model="selectedPrefecture"
+          label="エリア選択"
+          return-object
+          @change="onSetArea"
+        ></v-select>
+      </v-flex>
+
+      <v-flex xs12 sm8></v-flex>
+      <v-flex xs12 sm6>
+        <v-card>
+        </v-card>
+      </v-flex>
+    </v-layout>
+
+  </v-card>
+</v-container>

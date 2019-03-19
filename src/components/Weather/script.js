@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       //表示情報
-      weatherInfo: [],
+      weatherInfoList: [],
       //表示情報その2
       weatherSummary: 'no text',
 
@@ -82,9 +82,9 @@ export default {
       axios
         .get(this.requestUrl)
         .then(response => {
-          self.weatherInfo = response.data.forecasts
-          for (let i = 0; i < self.weatherInfo.length; i++) {
-            let temperature = self.weatherInfo[i].temperature
+          self.weatherInfoList = response.data.forecasts
+          for (let i = 0; i < self.weatherInfoList.length; i++) {
+            let temperature = self.weatherInfoList[i].temperature
             if (temperature.min === null) {
               // temperature.min.push({celsius:'-'})
               temperature.min = {
