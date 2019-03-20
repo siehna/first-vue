@@ -27,7 +27,7 @@
 
     <!--コンテンツ-->
     <v-layout row wrap grid-list-xl>
-      <v-flex xs12 sm4 v-for="weatherInfo in weatherInfoList" :key="weatherInfo.dateLabel">
+      <v-flex xs12 sm4 v-for="weatherInfo in cityWeather.weatherInfoList" :key="cityWeather.weatherInfoList.dateLabel">
         <!--データ構造体を渡す-->
         <WeatherCard
           :weatherInfo="weatherInfo"
@@ -35,7 +35,7 @@
       </v-flex>
     </v-layout>
 
-    <!--概況ボタン-->
+    <!--概況-->
     <div class="text-xs-center">
       <v-dialog
         v-model="dialog"
@@ -60,7 +60,7 @@
           </v-card-title>
 
           <v-card-text>
-            {{ weatherSummary }}
+            {{ cityWeather.description }}
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>

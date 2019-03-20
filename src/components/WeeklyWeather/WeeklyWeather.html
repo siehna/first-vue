@@ -6,16 +6,24 @@
         <v-select
           :items="prefectures"
           v-model="selectedPrefecture"
+          item-text="areaName"
           label="エリア選択"
-          return-object
           @change="onSetArea"
+          return-object
         ></v-select>
       </v-flex>
 
       <v-flex xs12 sm8></v-flex>
-      <v-flex xs12 sm6>
-        <v-card>
+      <v-flex xs12>
+        <v-card color="grey darken-2">
+          {{ cityWeather.description}}
         </v-card>
+      </v-flex>
+
+      <!--テーブルの中に天気帯を仕込む-->
+      <v-flex xs12>
+        <WeeklyWeatherCard>
+        </WeeklyWeatherCard>
       </v-flex>
     </v-layout>
 

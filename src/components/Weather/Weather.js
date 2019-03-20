@@ -6,10 +6,7 @@ export default {
   components: {WeatherCard},
   data() {
     return {
-      //表示情報
-      weatherInfoList: [],
-      //表示情報その2
-      weatherSummary: 'no text',
+      cityWeather: [],
 
       //各種v-モデル用のitem
       prefectures: [],
@@ -73,36 +70,35 @@ export default {
 
 
     //天気情報の取得
-    getWeatherData: function () {
+    getWeatherData: async function () {
       // カードの情報をつっこむ
       //　thisが使えないので変数に入れて使う ついでにweather付けとくとコード量減 ?
       let self = this
 
       //APIの読み込み
-      axios
+      let cityWeather = await axios
         .get(this.requestUrl)
         .then(response => {
-          self.weatherInfoList = response.data.forecasts
-          for (let i = 0; i < self.weatherInfoList.length; i++) {
-            let temperature = self.weatherInfoList[i].temperature
+          let weatherInfoList = response.data.forecasts
+          for (let i = 0; i < weatherInfoList.length; i++) {
+            let temperature = weatherInfoList[i].temperature
             if (temperature.min === null) {
-              // temperature.min.push({celsius:'-'})
-              temperature.min = {
-                celsius: '-'
-              }
+              temperature.min = {celsius: '-'}
             }
             if (temperature.max === null) {
-              // temperature.max.celsius = '-'
-              temperature.max = {
-                celsius: '-'
-              }
+              temperature.max = {celsius: '-'}
             }
           }
-          self.weatherSummary = response.data.description.text
+          return {
+            weatherInfoList,
+            description: response.data.description.text
+          }
         })
         .catch(err => {
           console.error(err)
         })
+
+      this.cityWeather = cityWeather
     },
 
     // イベントハンドラ
