@@ -12,8 +12,31 @@ export default {
       selectedPrefecture: [],
       cityList: [],
 
-      requestUrl: []
+      requestUrl: [],
 
+
+      //データテーブル用
+      headers: [
+        // {text: '表示点', align: 'center', sortable: false, value: 'location'},
+        // {text: '今日', align: 'center', sortable: false, value: 'today'},
+        // {text: '明日', align: 'center', sortable: false, value: 'TwoDay'}
+      ],
+      weeklyWeather: [
+        {
+          cityName:'',
+          weeklyWeathers:[{
+            url:'',
+            text:''
+          }],
+
+          location: 'boo',
+          twoDay: 'zoo'
+        },
+        {
+          location: 'zzz',
+          today: 'rrr',
+          twoDay: 'mmm'
+        }]
     }
   },
 

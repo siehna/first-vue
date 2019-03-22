@@ -13,17 +13,30 @@
         ></v-select>
       </v-flex>
 
-      <v-flex xs12 sm8></v-flex>
+
+      <!--テーブルの中に天気帯を仕込む-->
+      <v-flex xs12>
+
+        <!--テーブル化したいところ-->
+        <v-data-table
+          :headers="headers"
+          :items="weeklyWeather"
+        >
+          <template v-slot:items="props">
+            <td>{{ props.item.location }}</td>
+            <td><img src="">{{ props.item.today }}</td>
+            <td>{{ props.item.twoDay }}</td>
+          </template>
+        </v-data-table>
+
+      </v-flex>
+
+
+      <!--概況文-->
       <v-flex xs12>
         <v-card color="grey darken-2">
           {{ cityWeather.description}}
         </v-card>
-      </v-flex>
-
-      <!--テーブルの中に天気帯を仕込む-->
-      <v-flex xs12>
-        <WeeklyWeatherCard>
-        </WeeklyWeatherCard>
       </v-flex>
     </v-layout>
 
