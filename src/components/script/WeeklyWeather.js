@@ -1,5 +1,5 @@
 import axios from 'axios'
-import WeeklyWeatherCard from '@/components/WeeklyWeather/WeeklyWeatherCard/WeeklyWeatherCard'
+import WeeklyWeatherCard from '@/components/script/WeeklyWeatherCard'
 
 export default {
   name: 'weekly-weather',

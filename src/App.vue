@@ -9,8 +9,8 @@
 </template>
 
 <script>
-  import ContentHeader from '@/components/Header/Header'
-  import Sidebar from '@/components/Sidebar/Sidebar'
+  import ContentHeader from '@/components/vue/Header.vue'
+  import Sidebar from '@/components/vue/Sidebar.vue'
 
   export default {
     // el: '#app',

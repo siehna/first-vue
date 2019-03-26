@@ -1,5 +1,5 @@
 import axios from 'axios'
-import WeatherCard from '@/components/Weather/WeatherCard/WeatherCard'
+import WeatherCard from '@/components/vue/WeatherCard'
 
 export default {
   name: 'weather-component',
