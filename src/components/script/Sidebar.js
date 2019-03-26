@@ -6,7 +6,8 @@ export default {
         {title: 'Todo', link: '/'},
         {title: 'CustomTodo', link: '/custom'},
         {title: 'Weather', link: '/weather'},
-        {title: 'WeeklyWeather', link:'weekly'}
+        {title: 'WeeklyWeather', link:'weekly'},
+        {title: 'Map', link:'map'}
       ]
     }
   },
