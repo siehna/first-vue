@@ -3,11 +3,11 @@ export default {
     return {
       drawer: false,
       items: [
-        {title: 'Todo', link: '/'},
-        {title: 'CustomTodo', link: '/custom'},
-        {title: 'Weather', link: '/weather'},
-        {title: 'WeeklyWeather', link:'weekly'},
-        {title: 'Map', link:'map'}
+        {icon:'assignment',title: 'Todo', link: '/'},
+        {icon:'assignment',title: 'CustomTodo', link: '/custom'},
+        {icon:'settings_input_antenna',title: 'Weather', link: '/weather'},
+        {icon:'settings_input_antenna',title: 'WeeklyWeather', link:'weekly'},
+        {icon:'photo',title: 'Map', link:'map'}
       ]
     }
   },
