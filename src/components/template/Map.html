@@ -1,1 +1,16 @@
-<div id="map" style="width:910px; height:390px; align-self: center"></div>
+<v-container>
+
+  <v-card>
+    <v-flex
+      @click.stop="getLatLng">
+      <div id="map"
+           style="
+           height:390px;
+           align: center "></div>
+    </v-flex>
+
+    <v-flex>
+      <h1>緯度: {{ lat }}    {{ lngtext }}: {{ lng }}</h1>
+    </v-flex>
+  </v-card>
+</v-container>
