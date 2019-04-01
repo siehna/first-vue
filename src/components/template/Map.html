@@ -2,7 +2,7 @@
 
   <v-card>
     <v-flex
-      @click.stop="getLatLng">
+      @click.stop="onDragEndMap">
       <div id="map"
            style="
            height:390px;
@@ -11,6 +11,8 @@
 
     <v-flex>
       <h1>緯度: {{ lat }}    {{ lngtext }}: {{ lng }}</h1>
+      <h2>[中央付近の天気] : {{ weather }}</h2>
+      <h2>[本日] 最低気温: {{ low }}℃　最高気温: {{ high }}℃</h2>
     </v-flex>
   </v-card>
 </v-container>
