@@ -13,6 +13,7 @@ export default {
       weather: ''
     }
   },
+
   methods: {
     getMap: function () {
       let MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516)
