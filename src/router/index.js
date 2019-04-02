@@ -5,6 +5,7 @@ import CustomTodo from '@/components/vue/CustomTodo'
 import Weather from '@/components/vue/Weather'
 import WeeklyWeather from '@/components/vue/WeeklyWeather'
 import Map from '@/components/vue/Map'
+import Camera from '@/components/vue/Camera'
 // import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
@@ -35,6 +36,11 @@ export default new Router({
       path:'/map',
       name:'Map',
       component:Map
+    },
+    {
+      path:'/camera',
+      name:'Camera',
+      component:Camera
     }
   ]
 })
